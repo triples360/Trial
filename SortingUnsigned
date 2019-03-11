@@ -1,0 +1,30 @@
+#include<iostream>
+using namespace std;
+
+unsigned partition(unsigned *, unsigned,unsigned);
+void quickSort(unsigned *arr, unsigned start, unsigned end) {
+  if (start >= end)
+    return;
+  unsigned mid;
+  mid = partition(arr, start, end);
+  if(mid!=0)
+  quickSort(arr, start, mid - 1);
+  quickSort(arr, mid + 1, end);
+}
+
+unsigned partition(unsigned *arr, unsigned start, unsigned end) {
+  unsigned q = start, u, tmp;
+  unsigned pivot = arr[end];
+  for (u = start; u <= end - 1; u++) {
+    if (arr[u] <= pivot) {
+      tmp = arr[q];
+      arr[q] = arr[u];
+      arr[u] = tmp;
+      q++;
+    }
+  }
+  tmp = arr[q];
+  arr[q] = arr[end];
+  arr[end] = tmp;
+  return q ;
+}
